@@ -1,0 +1,45 @@
+# Project: attendance
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = ../src/attendance_private.res
+OBJ      = ../src/main.o ../src/timer.o ../src/data.o ../src/thread.o ../src/ctrls.o $(RES)
+LINKOBJ  = ../src/main.o ../src/timer.o ../src/data.o ../src/thread.o ../src/ctrls.o $(RES)
+LIBS     = -L"E:/DevTools/Dev-Cpp/MinGW64/lib" -L"E:/DevTools/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -L"E:/DevTools/Dev-Cpp/MinGW64/customlib" -L"E:/DevTools/Dev-Cpp/MinGW64/opengl" -static-libgcc -ldoublebuffer -mwindows -lctrlmanager
+INCS     = -I"E:/DevTools/Dev-Cpp/MinGW64/include" -I"E:/DevTools/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/DevTools/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"E:/DevTools/Dev-Cpp/MinGW64/customlib" -I"E:/DevTools/Dev-Cpp/MinGW64/opengl" -I"D:/computer/project/attendance/src"
+CXXINCS  = -I"E:/DevTools/Dev-Cpp/MinGW64/include" -I"E:/DevTools/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/DevTools/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"E:/DevTools/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++" -I"E:/DevTools/Dev-Cpp/MinGW64/opengl" -I"D:/computer/project/attendance/src"
+BIN      = ../attendance.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+../src/main.o: main.c
+	$(CC) -c main.c -o ../src/main.o $(CFLAGS)
+
+../src/timer.o: timer.c
+	$(CC) -c timer.c -o ../src/timer.o $(CFLAGS)
+
+../src/data.o: data.c
+	$(CC) -c data.c -o ../src/data.o $(CFLAGS)
+
+../src/thread.o: thread.c
+	$(CC) -c thread.c -o ../src/thread.o $(CFLAGS)
+
+../src/ctrls.o: ctrls.c
+	$(CC) -c ctrls.c -o ../src/ctrls.o $(CFLAGS)
+
+../src/attendance_private.res: attendance_private.rc 
+	$(WINDRES) -i attendance_private.rc --input-format=rc -o ../src/attendance_private.res -O coff  --include-dir D:/computer/project/attendance/src
+
