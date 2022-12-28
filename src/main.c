@@ -118,10 +118,6 @@ LRESULT CALLBACK MainWndProc(HWND hWnd,UINT iMessage,WPARAM wParam,LPARAM lParam
 							timerThread=(HANDLE)StartThread(ThreadFunc,&thrdData);
 						}
 					}
-					if(GetKeyState(VK_ESCAPE)&0x8000){
-						ShowWindow(hWnd,SW_SHOW);
-						thrdData.backgrounded=0;
-					}
 					break;
 			}
 			return 0;
